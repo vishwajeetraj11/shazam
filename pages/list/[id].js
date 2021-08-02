@@ -21,7 +21,7 @@ const List = () => {
 
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
-	const [tracks, setTracks] = useState([]);
+	const [tracks, setTracks] = useState(trackData);
 	const [selectedTrack, setSelectedTrack] = useState();
 
 	const [audio, setAudio] = useState(null);
@@ -49,7 +49,11 @@ const List = () => {
 		}
 	};
 
-	// const getCharts = async () => {};
+	useEffect(() => {
+		return () => {
+			if (audio) audio.src = null;
+		};
+	}, [audio]);
 
 	useEffect(() => {
 		if (router.query.id) {
